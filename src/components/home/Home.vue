@@ -21,7 +21,7 @@
         v-if="historyData.length"
         ref="recycleScroll"
         :items="historyData"
-        :item-size="50"
+        :item-size="60"
         key-field="Id"
         class="scroller"
         v-slot="{ item }"
@@ -43,8 +43,26 @@
       style="position: fixed;"
     >
       <v-container fluid>
-        <v-row>
-          <v-col>
+        <v-row justify="space-between">
+          <v-col cols="5">
+            <v-timeline 
+              side="end"
+              truncate-line="both"
+              size="large"
+              direction="horizontal"
+            >
+              <v-timeline-item class="president-dot">
+                <template v-slot:icon>
+                  <v-avatar :image="currentPresident.Image"></v-avatar>
+                </template>
+                <template v-slot:opposite>
+                  <span>President</span>
+                </template>
+                <div>{{ currentPresident.Name }}</div>
+              </v-timeline-item>
+            </v-timeline>
+          </v-col>
+          <v-col cols="6">
             <v-timeline 
               side="end"
               truncate-line="both"
@@ -56,27 +74,16 @@
                 icon="mdi-bank-outline"
               >
                 <template v-slot:opposite>
-                  <span>Senate</span>
+                  Senate
                 </template>
                 <div>{{ currentSenate.MajorityParty }}</div>
-              </v-timeline-item>
-              <v-timeline-item
-                class="president-dot"
-              >
-                <template v-slot:icon>
-                  <v-avatar :image="currentPresident.Image"></v-avatar>
-                </template>
-                <template v-slot:opposite>
-                  <span>President</span>
-                </template>
-                <div>{{ currentPresident.Name }}</div>
               </v-timeline-item>
               <v-timeline-item 
                 :dot-color="HouseMajorityParty"
                 icon="mdi-bank-outline"
               >
                 <template v-slot:opposite>
-                  <span>House</span>
+                  House
                 </template>
                 <div>{{ currentHouse.MajorityParty }}</div>
               </v-timeline-item>
